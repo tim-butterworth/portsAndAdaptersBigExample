@@ -1,0 +1,37 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
+    id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.application.organization'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+def useFake = {
+    println(System.getenv('FAKE'))
+    if (System.getenv('FAKE') == null) {
+        println("hi there")
+    }
+    if (System.getenv('FAKE')) {
+        println("well well well...")
+    }
+    return System.getenv('FAKE')
+}
+
+dependencies {
+    implementation(project(":application/core"))
+    implementation(project(":application/adapters"))
+
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('io.vavr:vavr:0.9.0')
+
+    runtimeOnly('org.springframework.boot:spring-boot-devtools')
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}

@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.application.organization'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('io.vavr:vavr:0.9.0')
+    implementation(project(":application/core"))
+
+    annotationProcessor("org.immutables:value:2.7.4")
+
+    runtimeOnly("org.immutables:value:2.7.4:annotations")
+    runtimeOnly("org.immutables:builder:2.7.4")
+    runtimeOnly("org.immutables:gson:2.7.4:annotations")
+}

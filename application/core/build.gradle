@@ -1,0 +1,63 @@
+buildscript {
+    ext {
+        immutableValueVersion = "2.7.4"
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("net.ltgt.gradle:gradle-apt-plugin:0.20")
+    }
+}
+
+plugins {
+    id "java"
+    id "idea"
+}
+
+apply plugin: "net.ltgt.apt-idea"
+
+group = "com.application.organization"
+version = "0.0.1-SNAPSHOT"
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('io.vavr:vavr:0.9.0')
+
+    annotationProcessor("org.immutables:value:${immutableValueVersion}")
+
+    implementation("org.immutables:value:${immutableValueVersion}:annotations")
+    runtimeOnly("org.immutables:builder:${immutableValueVersion}")
+    runtimeOnly("org.immutables:gson:${immutableValueVersion}:annotations")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
+    testImplementation("org.assertj:assertj-core:3.11.1")
+
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
+}
+
+test {
+    useJUnitPlatform()
+}
+
+configurations {
+    testArtifacts.extendsFrom testRuntime
+}
+
+//task testJar (type: Jar) {
+//    baseName = "${project.name}-test"
+//    from sourceSets.test.output
+//}
+task testJar (type: Jar) {
+//    baseName = "${project.name}-test"
+    classifier = 'tests'
+    from sourceSets.test.output
+}
+artifacts {
+    testArtifacts testJar
+}

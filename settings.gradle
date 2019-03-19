@@ -1,0 +1,11 @@
+pluginManagement {
+	repositories {
+		gradlePluginPortal()
+	}
+}
+rootProject.name = 'ports-and-adapters'
+
+include("application/web")
+include("application/core")
+include("application/adapters")
+include("application/fake-adapters")

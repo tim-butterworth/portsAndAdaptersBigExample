@@ -4,6 +4,8 @@ import com.application.organization.portsandadapters.shipments.configuration.Dat
 import com.application.organization.portsandadapters.shipments.configuration.DatabaseConfiguration;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -12,6 +14,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
         DatabaseConfiguration.class,
         DataLoader.class
 })
+@EnableConfigurationProperties
+@PropertySource("classpath:application.properties")
 class ShipmentsH2RepositoryTest extends ShipmentsRepositoryTest {
 
     @Autowired

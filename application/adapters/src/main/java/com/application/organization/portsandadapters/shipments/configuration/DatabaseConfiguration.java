@@ -13,8 +13,6 @@ import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableConfigurationProperties
-@PropertySource("classpath:application.properties")
 public class DatabaseConfiguration {
 
     @Bean

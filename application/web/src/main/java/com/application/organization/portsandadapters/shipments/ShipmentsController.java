@@ -15,7 +15,6 @@ public class ShipmentsController {
     }
 
     @GetMapping
-
     public ResponseEntity<?> allShipments() {
         return allShipmentsProcessor.execute();
     }

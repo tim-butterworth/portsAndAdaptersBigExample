@@ -50,11 +50,6 @@ class AllShipmentsProcessorTest {
             public Either<ShipmentsRepositoryError, List<CoreShipment>> findAll() {
                 return Either.right(shipments);
             }
-
-            @Override
-            public Either<ShipmentsRepositoryError, String> save(CoreShipment shipment) {
-                return null;
-            }
         };
     }
 
@@ -63,11 +58,6 @@ class AllShipmentsProcessorTest {
             @Override
             public Either<ShipmentsRepositoryError, List<CoreShipment>> findAll() {
                 return Either.left(new ShipmentsRepositoryError());
-            }
-
-            @Override
-            public Either<ShipmentsRepositoryError, String> save(CoreShipment shipment) {
-                return null;
             }
         };
     }

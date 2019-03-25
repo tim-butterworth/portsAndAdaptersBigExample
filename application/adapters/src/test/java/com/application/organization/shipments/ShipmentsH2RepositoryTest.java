@@ -6,8 +6,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {
@@ -16,13 +20,24 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 })
 @EnableConfigurationProperties
 @PropertySource("classpath:application.properties")
-class ShipmentsH2RepositoryTest extends ShipmentsRepositoryTest {
+public class ShipmentsH2RepositoryTest extends ShipmentsRepositoryTest {
 
     @Autowired
     private ShipmentsRepository shipmentsRepository;
 
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
     @Override
-    ShipmentsRepository getImplementation() {
+    protected ShipmentsRepository getImplementation() {
         return shipmentsRepository;
+    }
+
+    @Override
+    protected void saveShipment(CoreShipment coreShipment) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("destination", coreShipment.destination());
+
+        int updateCount = namedParameterJdbcTemplate.update("INSERT INTO SHIPMENTS (destination) values (:destination)", paramMap);
     }
 }

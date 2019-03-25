@@ -14,19 +14,17 @@ repositories {
 }
 
 def useFake = {
-    println(System.getenv('FAKE'))
-    if (System.getenv('FAKE') == null) {
-        println("hi there")
-    }
-    if (System.getenv('FAKE')) {
-        println("well well well...")
-    }
     return System.getenv('FAKE')
 }
 
 dependencies {
-    implementation(project(":application/core"))
-    implementation(project(":application/adapters"))
+    implementation(project(":core"))
+
+    if (useFake()) {
+        implementation(project(":fake-adapters"))
+    } else {
+        implementation(project(":adapters"))
+    }
 
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('io.vavr:vavr:0.9.0')

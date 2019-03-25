@@ -5,7 +5,17 @@ pluginManagement {
 }
 rootProject.name = 'ports-and-adapters'
 
-include("application/web")
-include("application/core")
-include("application/adapters")
-include("application/fake-adapters")
+include("web")
+project(":web").projectDir = file("application/web")
+
+include("core")
+project(":core").projectDir = file("application/core")
+
+include("adapters")
+project(":adapters").projectDir = file("application/adapters")
+
+include("fake-adapters")
+project(":fake-adapters").projectDir = file("application/fake-adapters")
+
+include("data-inserter")
+project(":data-inserter").projectDir = file("helpers/dataInserter")

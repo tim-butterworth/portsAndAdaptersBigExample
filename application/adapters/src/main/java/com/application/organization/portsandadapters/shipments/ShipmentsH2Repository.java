@@ -33,16 +33,4 @@ public class ShipmentsH2Repository implements ShipmentsRepository {
 
         return Either.right(shipments);
     }
-
-    @Override
-    public Either<ShipmentsRepositoryError, String> save(CoreShipment shipment) {
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("destination", shipment.destination());
-
-        int updateCount = namedParameterJdbcTemplate.update("INSERT INTO SHIPMENTS (destination) values (:destination)", paramMap);
-        if (updateCount > 0) {
-            return Either.right("Success");
-        }
-        return Either.left(new ShipmentsRepositoryError());
-    }
 }

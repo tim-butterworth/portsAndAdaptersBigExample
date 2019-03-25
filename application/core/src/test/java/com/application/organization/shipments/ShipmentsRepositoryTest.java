@@ -9,13 +9,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class ShipmentsRepositoryTest {
 
-    abstract ShipmentsRepository getImplementation();
+    protected abstract ShipmentsRepository getImplementation();
+    protected abstract void saveShipment(CoreShipment coreShipment);
 
     @Test
     public void canSaveAndRetrieveAShipment() {
         ShipmentsRepository implementation = getImplementation();
 
-        implementation.save(
+        Integer initialValueCount = implementation.findAll().bimap((error) -> 0, List::size).getOrElse(0);
+
+        saveShipment(
                 ImmutableCoreShipment.builder()
                         .destination("Summer Home")
                         .build()
@@ -24,9 +27,8 @@ public abstract class ShipmentsRepositoryTest {
         List<CoreShipment> shipments = implementation.findAll()
                 .getOrElseThrow((Supplier<RuntimeException>) RuntimeException::new);
 
-        assertThat(shipments).hasSize(1);
+        assertThat(shipments).hasSize(initialValueCount + 1);
 
-        CoreShipment coreShipment = shipments.get(0);
-        assertThat(coreShipment).isEqualTo(ImmutableCoreShipment.builder().destination("Summer Home").build());
+        assertThat(shipments).contains(ImmutableCoreShipment.builder().destination("Summer Home").build());
     }
 }

@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
         urlConnection.doOutput = true
         urlConnection.doInput = true
 
-        val shipment = """{ "destination": "Beneath" }"""
+        val shipment = """{ "destination": "The" }"""
         val outputStream = urlConnection.outputStream
 
         outputStream.write(shipment.toByteArray())
@@ -29,7 +29,7 @@ fun main(args: Array<String>) {
         inputStream.close()
 
         urlConnection.disconnect()
-    } catch (e: IOException) {
+    } catch (e: Exception) {
         println(e.message)
     }
 }

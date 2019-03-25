@@ -2,9 +2,9 @@ package com.application.organization.portsandadapters.shipments.configuration;
 
 import com.application.organization.portsandadapters.shipments.CoreShipmentToShipmentConverter;
 import com.application.organization.portsandadapters.shipments.WebAllShipmentResponder;
-import com.application.organization.shipments.AllShipmentsProcessor;
-import com.application.organization.shipments.AllShipmentsResponder;
-import com.application.organization.shipments.ShipmentsRepository;
+import com.application.organization.shipments.all.AllShipmentsProcessor;
+import com.application.organization.shipments.all.AllShipmentsResponder;
+import com.application.organization.shipments.cachedShipments.ShipmentsRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;

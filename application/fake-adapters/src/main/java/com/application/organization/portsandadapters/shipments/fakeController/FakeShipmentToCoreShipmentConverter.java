@@ -1,13 +1,13 @@
 package com.application.organization.portsandadapters.shipments.fakeController;
 
-import com.application.organization.shipments.CoreShipment;
-import com.application.organization.shipments.ImmutableCoreShipment;
+import com.application.organization.shipments.cachedShipments.ImmutableSimplifiedCoreShipment;
+import com.application.organization.shipments.cachedShipments.SimplifiedCoreShipment;
 import org.springframework.stereotype.Component;
 
 @Component
 public class FakeShipmentToCoreShipmentConverter {
-    public CoreShipment toCoreShipment(FakeShipment shipment) {
-        return ImmutableCoreShipment.builder()
+    public SimplifiedCoreShipment toCoreShipment(FakeShipment shipment) {
+        return ImmutableSimplifiedCoreShipment.builder()
                 .destination(shipment.getDestination())
                 .build();
     }

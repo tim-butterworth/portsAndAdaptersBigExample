@@ -1,8 +1,8 @@
 package com.application.organization.portsandadapters.shipments;
 
-import com.application.organization.shipments.AllShipmentsResponder;
-import com.application.organization.shipments.CoreShipment;
-import com.application.organization.shipments.ShipmentsRepositoryError;
+import com.application.organization.shipments.all.AllShipmentsResponder;
+import com.application.organization.shipments.cachedShipments.SimplifiedCoreShipment;
+import com.application.organization.shipments.cachedShipments.ShipmentsRepositoryError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -18,7 +18,7 @@ public class WebAllShipmentResponder implements AllShipmentsResponder<ResponseEn
     }
 
     @Override
-    public ResponseEntity<?> success(List<CoreShipment> shipments) {
+    public ResponseEntity<?> success(List<SimplifiedCoreShipment> shipments) {
         List<Shipment> shipmentList = shipments.stream()
                 .map(coreShipmentToShipmentConverter::convert)
                 .collect(Collectors.toList());

@@ -1,8 +1,8 @@
 package com.application.organization.portsandadapters.shipments.configuration;
 
 import com.application.organization.portsandadapters.shipments.FakeShipmentsRepository;
-import com.application.organization.shipments.CoreShipment;
-import com.application.organization.shipments.ShipmentsRepository;
+import com.application.organization.shipments.cachedShipments.SimplifiedCoreShipment;
+import com.application.organization.shipments.cachedShipments.ShipmentsRepository;
 import com.application.organization.shipments.ShipmentsRepositoryTest;
 
 public class FakeShipmentsRepositoryTest extends ShipmentsRepositoryTest {
@@ -17,7 +17,7 @@ public class FakeShipmentsRepositoryTest extends ShipmentsRepositoryTest {
     }
 
     @Override
-    protected void saveShipment(CoreShipment coreShipment) {
-        fakeShipmentsRepository.save(coreShipment);
+    protected void saveShipment(SimplifiedCoreShipment simplifiedCoreShipment) {
+        fakeShipmentsRepository.save(simplifiedCoreShipment);
     }
 }

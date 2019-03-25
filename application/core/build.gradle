@@ -49,10 +49,6 @@ configurations {
     testArtifacts.extendsFrom testRuntime
 }
 
-//task testJar (type: Jar) {
-//    baseName = "${project.name}-test"
-//    from sourceSets.test.output
-//}
 task testJar (type: Jar) {
 //    baseName = "${project.name}-test"
     classifier = 'tests'

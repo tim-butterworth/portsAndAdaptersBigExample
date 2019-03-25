@@ -1,5 +1,6 @@
-package com.application.organization.shipments;
+package com.application.organization.shipments.all;
 
+import com.application.organization.shipments.cachedShipments.ShipmentsRepository;
 import io.vavr.control.Either;
 
 public class AllShipmentsProcessor<T> {

@@ -1,5 +1,11 @@
 package com.application.organization.shipments;
 
+import com.application.organization.shipments.cachedShipments.ImmutableSimplifiedCoreShipment;
+import com.application.organization.shipments.cachedShipments.ShipmentsRepository;
+import com.application.organization.shipments.cachedShipments.ShipmentsRepositoryError;
+import com.application.organization.shipments.cachedShipments.SimplifiedCoreShipment;
+import com.application.organization.shipments.all.AllShipmentsProcessor;
+import com.application.organization.shipments.all.AllShipmentsResponder;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +21,7 @@ class AllShipmentsProcessorTest {
     @Test
     void givenASuccessfulRepositoryResponse_returnsSuccessResponse() {
         final String destinationWithRandomOffset = "description" + new Random().nextInt();
-        ImmutableCoreShipment coreShipment = ImmutableCoreShipment.builder()
+        ImmutableSimplifiedCoreShipment coreShipment = ImmutableSimplifiedCoreShipment.builder()
                 .destination(destinationWithRandomOffset)
                 .build();
 
@@ -25,7 +31,7 @@ class AllShipmentsProcessorTest {
         );
 
         assertThat(stringAllShipmentsProcessor.execute()).isEqualTo(
-                ImmutableCoreShipment.builder()
+                ImmutableSimplifiedCoreShipment.builder()
                         .destination(destinationWithRandomOffset)
                         .build()
                         .toString()
@@ -44,10 +50,10 @@ class AllShipmentsProcessorTest {
         assertThat(result).isEqualTo("This was a failure... I know that now");
     }
 
-    private ShipmentsRepository getSuccessRepository(List<CoreShipment> shipments) {
+    private ShipmentsRepository getSuccessRepository(List<SimplifiedCoreShipment> shipments) {
         return new ShipmentsRepository() {
             @Override
-            public Either<ShipmentsRepositoryError, List<CoreShipment>> findAll() {
+            public Either<ShipmentsRepositoryError, List<SimplifiedCoreShipment>> findAll() {
                 return Either.right(shipments);
             }
         };
@@ -56,7 +62,7 @@ class AllShipmentsProcessorTest {
     private ShipmentsRepository getErrorRepository() {
         return new ShipmentsRepository() {
             @Override
-            public Either<ShipmentsRepositoryError, List<CoreShipment>> findAll() {
+            public Either<ShipmentsRepositoryError, List<SimplifiedCoreShipment>> findAll() {
                 return Either.left(new ShipmentsRepositoryError());
             }
         };
@@ -65,7 +71,7 @@ class AllShipmentsProcessorTest {
     private AllShipmentsResponder<String> getAllShipmentsResponder() {
         return new AllShipmentsResponder<String>() {
             @Override
-            public String success(List<CoreShipment> shipments) {
+            public String success(List<SimplifiedCoreShipment> shipments) {
                 return shipments.stream()
                         .map(Object::toString)
                         .collect(Collectors.joining(", "));

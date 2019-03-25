@@ -2,6 +2,8 @@ package com.application.organization.shipments;
 
 import com.application.organization.portsandadapters.shipments.configuration.DataLoader;
 import com.application.organization.portsandadapters.shipments.configuration.DatabaseConfiguration;
+import com.application.organization.shipments.cachedShipments.ShipmentsRepository;
+import com.application.organization.shipments.cachedShipments.SimplifiedCoreShipment;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -34,9 +36,9 @@ public class ShipmentsH2RepositoryTest extends ShipmentsRepositoryTest {
     }
 
     @Override
-    protected void saveShipment(CoreShipment coreShipment) {
+    protected void saveShipment(SimplifiedCoreShipment simplifiedCoreShipment) {
         Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("destination", coreShipment.destination());
+        paramMap.put("destination", simplifiedCoreShipment.destination());
 
         int updateCount = namedParameterJdbcTemplate.update("INSERT INTO SHIPMENTS (destination) values (:destination)", paramMap);
     }

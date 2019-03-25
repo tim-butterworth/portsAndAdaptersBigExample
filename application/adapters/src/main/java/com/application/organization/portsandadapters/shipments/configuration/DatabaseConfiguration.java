@@ -1,12 +1,10 @@
 package com.application.organization.portsandadapters.shipments.configuration;
 
 import com.application.organization.portsandadapters.shipments.ShipmentsH2Repository;
-import com.application.organization.shipments.ShipmentsRepository;
+import com.application.organization.shipments.cachedShipments.ShipmentsRepository;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 

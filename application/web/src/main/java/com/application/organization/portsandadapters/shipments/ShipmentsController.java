@@ -1,6 +1,6 @@
 package com.application.organization.portsandadapters.shipments;
 
-import com.application.organization.shipments.AllShipmentsProcessor;
+import com.application.organization.shipments.all.AllShipmentsProcessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

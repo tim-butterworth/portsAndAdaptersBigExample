@@ -1,11 +1,11 @@
 package com.application.organization.portsandadapters.shipments;
 
-import com.application.organization.shipments.CoreShipment;
+import com.application.organization.shipments.cachedShipments.SimplifiedCoreShipment;
 
 public class CoreShipmentToShipmentConverter {
-    public Shipment convert(CoreShipment coreShipment) {
+    public Shipment convert(SimplifiedCoreShipment simplifiedCoreShipment) {
         Shipment shipment = new Shipment();
-        shipment.setDestination(coreShipment.destination());
+        shipment.setDestination(simplifiedCoreShipment.destination());
         return shipment;
     }
 }
